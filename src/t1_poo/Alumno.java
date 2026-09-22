@@ -9,28 +9,30 @@ package t1_poo;
  * @author UCA40424
  */
 public class Alumno {
-    private String tip_doc;
-    private String num_doc;
+
+    // Atributos privados → Encapsulamiento
     private String nombre;
-    private String tipo_beca;
-    private String pors_beca;
-    private String cod_alumno;
-    private int Telefono;
+    private String apellido;
+    private String documento;
+    private String tipo_Documento; // "DNI" o "CARNE_RESIDENCIA"
+    private String nivel_economico; // "A", "B", "C"
+    private String tipo_Beca; // "NINGUNA", "PARCIAL", "TOTAL"
+    private double tarifa_Base;
+    private double monto_Pagar;
+    private String beca;
+    private String nivel;
+    private String monto;
 
-    public String getTip_doc() {
-        return tip_doc;
-    }
-
-    public void setTip_doc(String tip_doc) {
-        this.tip_doc = tip_doc;
-    }
-
-    public String getNum_doc() {
-        return num_doc;
-    }
-
-    public void setNum_doc(String num_doc) {
-        this.num_doc = num_doc;
+    // Constructor con parámetros
+    public Alumno(String nombre, String apellido, String documento, String tipoDocumento,
+                  String nivel_economico, String tipoBeca, double tarifaBase) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.documento = documento;
+        this.tipo_Documento = tipoDocumento;
+        this.nivel_economico = nivel_economico;
+        this.tipo_Beca = tipoBeca;
+        this.tarifa_Base = tarifaBase;
     }
 
     public String getNombre() {
@@ -41,36 +43,68 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public String getTipo_beca() {
-        return tipo_beca;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setTipo_beca(String tipo_beca) {
-        this.tipo_beca = tipo_beca;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public String getPors_beca() {
-        return pors_beca;
+    public String getTipo_Documento() {
+        return tipo_Documento;
     }
 
-    public void setPors_beca(String pors_beca) {
-        this.pors_beca = pors_beca;
+    public void setTipo_Documento(String tipo_Documento) {
+        this.tipo_Documento = tipo_Documento;
     }
 
-    public String getCod_alumno() {
-        return cod_alumno;
+    public String getNivel_economico() {
+        return nivel_economico;
     }
 
-    public void setCod_alumno(String cod_alumno) {
-        this.cod_alumno = cod_alumno;
+    public void setNivel_economico(String nivel_economico) {
+        this.nivel_economico = nivel_economico;
     }
 
-    public int getTelefono() {
-        return Telefono;
+    public String getTipo_Beca() {
+        return tipo_Beca;
     }
 
-    public void setTelefono(int Telefono) {
-        this.Telefono = Telefono;
+    public void setTipo_Beca(String tipo_Beca) {
+        this.tipo_Beca = tipo_Beca;
     }
-    
+
+    public double getTarifa_Base() {
+        return tarifa_Base;
+    }
+
+    public void setTarifa_Base(double tarifa_Base) {
+        this.tarifa_Base = tarifa_Base;
+    }
+
+    public double getMonto_Pagar() {
+        return monto_Pagar;
+    }
+
+    public void setMonto_Pagar(double monto_Pagar) {
+        this.monto_Pagar = monto_Pagar;
+    }
+
+    // Método para calcular automáticamente el monto a pagar
+    public static boolean docValido(String doc, String tipo) {
+        if (doc == null) return false;
+        if (tipo.equals("DNI")) return doc.length() == 8;
+        return doc.length() == 11;
+    }
+
+    public static boolean nivelValido(String n) { return n.equals("A") || n.equals("B") || n.equals("C"); }
+    public static boolean becaValida(String b) { return b.equals("NINGUNA") || b.equals("PARCIAL") || b.equals("TOTAL"); }
+    public static boolean tipoDocValido(String t) { return t.equals("DNI") || t.equals("CARNE_RESIDENCIA"); }
+
+    public String getDocumento() { return documento; }
+
+    public String toString() {
+        return nombre + " " + apellido + " | " + documento + " | Nivel: " + nivel + " | Beca: " + beca + " | Pagar: S/ " + monto;
+    }
 }
